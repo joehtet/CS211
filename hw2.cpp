@@ -1,4 +1,5 @@
-
+// Htet, Joseph
+// CS211 Section 22D Homework 2
 
 #include <iostream>
 using namespace std;
