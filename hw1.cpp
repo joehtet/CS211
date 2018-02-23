@@ -8,12 +8,11 @@ using namespace std;
 
 // checks if the last two digits of num are both odd
 bool isOdd(int num) {
-
 	int ones_digit = num%10;
 	int tens_digit = (num/10)%10;
-
 	return (ones_digit%2!=0 && tens_digit%2!=0);
 }	
+
 
 int main() {
 

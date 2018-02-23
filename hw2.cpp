@@ -4,7 +4,29 @@
 #include <iostream>
 using namespace std;
 
-bool equivalent(int a[], int b[], int n);
+int shiftArray(int arr[], int shift_value) {
+    int shiftedArray[] = new int[size(arr)];
+
+    for(int i=0; i<arr.length; i++) {
+        shiftedArray[i] = 0;
+    }
+
+    return shiftedArray;
+}
+
+bool equivalent(int a[], int b[], int n) { 
+    cout << 1%5 << 2%5 << 3%5 << 4%5 << 5%5;
+    // 1. generate arrays of all possibilites 
+    // then check if arrays are equal
+    int shiftedArrays[n][n];
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<n; j++) {
+            shiftedArrays[i][j] = 0;
+        }
+    }
+
+
+};
 
 int main() {
    cout << boolalpha; // to show boolean value as "true" or "false"
