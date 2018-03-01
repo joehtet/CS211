@@ -5,12 +5,17 @@
 using namespace std;
 
 void print(int q[]) {
-    cout << "  " << q[0] << " " << q[1] << endl;
-    cout << q[2] << " " << q[3] << " " << q[4] << " " << q[5] << endl;
-    cout << "  " << q[6] << " " << q[7] << endl;
+    cout << "Solution" << endl;
+    cout << "--------" << endl;
+
+    cout << "     " << q[0] << " " << q[1] << endl;
+    cout << "   " << q[2] << " " << q[3] << " " << q[4] << " " << q[5] << endl;
+    cout << "   " << "  " << q[6] << " " << q[7] << endl;
 }
 
 bool ok(int q[], int s, int c) { 
+
+    // adjacency array a 
     int a[8][8] = 
     {
         {-1}, 
@@ -23,7 +28,7 @@ bool ok(int q[], int s, int c) {
         {3,4,5,6,-1} 
     };
 
-    // row test left side of q[c]
+    // row test checking left side of q[c]
     for(int j=0; j<c; j++) {
         if(s==q[j]) {
             return false;
@@ -50,28 +55,23 @@ void backtrack(int &c) {
 int main() {
 
     // q[] - board
-    int c = 0;
     int q[8];
-    
-/*
-     _____
-   _|__|__|_
-  |_|__|__|_|
-    |__|__|
+    int c = 0;
+    int s; // s is the set of possible values for q[c] (1,2,3,4,5,6,7,8)
 
-*/
     int from_backtrack = false;
     int valueFound;
 
     while(c<8) {
         valueFound = false;
 
-        int s;
         if(from_backtrack) { 
             from_backtrack = false;
             s=q[c]+1; 
         }
+
         else{s=1;}
+
         while(s<9) {
             if(ok(q,s,c)) {
                 valueFound = true;
