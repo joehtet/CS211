@@ -1,109 +1,93 @@
-// Htet, Joseph
+// Htet, Joseph 
 // CS211 Section 22D Homework 5
 
-/*
-    Complete the 8 queens 1 dimensional array program with 
-    backtracking that we worked on in class without GOTOs.
-Link: 
-    http://venus.cs.qc.cuny.edu/~cli/211/lab_php/lab.php?name=without_goto_outline
+/* 
+    Complete the 8 queens 1 dimensional array program without gotos
 */
 
+
 #include <iostream>
-#include <stdlib.h>
 #include <cmath>
+#include <cstdlib>
 using namespace std;
 
-void print(int q[8], int col) {
+void print(int q[]) {
     int board[8][8] = {0};
 
     // place 1's on board
     for(int i=0; i<8; i++) {
         board[q[i]][i] = 1;
     }
-
-    cout << "  Solution #" << col << endl;
-    /*
+ 
     for(int i=0; i<8; i++) {
         for(int j=0; j<8; j++) {
             cout << " " << board[i][j];
         }
         cout << endl;
     }
-    */
-
-    for(int i=0; i<8; i++) {
-        cout << q[i] << endl;
-    }
     cout << "----------------" << endl;
+
 }
 
-bool ok(int q[], int col) {
-    for (int i = 0; i < col; i++) {             
-        if (q[i]==q[col] || (col-i)==abs(q[col]-q[i])) {
-            return true;
+void backtrack(int &c) {
+    c--;
+    if(c==-1) { 
+        exit(1); 
+    }
+}
+
+bool ok(int q[], int c) {
+    for(int i = 0; i < c; i++) {
+        if(q[i] == q[c] || (c-i) == abs(q[c] - q[i])) {
+            return false;
         }
     }
-
-    return false;
+    return true;
 }
 
-void backtrack(int &col) {
-    col--;
-    if(col==-1) {
-        exit(0);
-    }
-    
-}
+int main() {
 
-int main(){
-
-    /*board setup */
-
+    // initialize    
+    int c = 0;
+    int row=0;
     int q[8];
-    int c=1;
-    int counter=0;
-
     q[0] = 0;
+    bool fromBacktrack = false;
 
+    int counter = 1;
 
-    bool from_backtrack=false;
+    while(true) {
+    // loop through columns
+        while(c!=8) {
 
-    while(true){  //loop for finding all solutions
-        while(c<8){//loop for next col:
-            if(!from_backtrack) {//if from backtrack go to next row.
-
-                /*column section*/
-                q[c] = -1;
-                from_backtrack = true;
+            if(fromBacktrack) {
+                row = q[c]+1;
+                fromBacktrack = false;
             }
-
-            from_backtrack=false;
-            while(q[c]<8){ //loop for next row:
-
-                /*row section*/
-                q[c]++;
-
-                if(q[c]==8) { 
-                    from_backtrack=true;
-                    backtrack(c);
+            else { row=0; }
+            
+            for(q[c]=row; q[c]!=8; ++q[c]) {
+                if(ok(q, c)) {
                     break;
                 }
-
-                if(ok(q,c)) {
-                    from_backtrack = false;
-                    c++;
-                    break;
-                }
-
-                from_backtrack=true;
-                backtrack(c); //backtrack always follows flag.
             }
+
+            if(q[c] >= 8) {
+                backtrack(c);
+                fromBacktrack = true;
+            }
+
+            else { c++; }
+
         }
+
+        cout << "   Solution #" << counter << endl;
+        print(q);
         counter++;
-        print(q,counter) ;/*print section*/
-        from_backtrack=true;
-        backtrack(c); //after print go to backtrack.
+        backtrack(c);
+        fromBacktrack = true;
     }
 
     return 0;
 }
+
