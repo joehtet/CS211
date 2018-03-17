@@ -1,5 +1,5 @@
 // Htet, Joseph
-// CS211 Section 22D Homework 4
+// CS211 Section 22D Homework 9
 
 /*
     Fancy printing for 1 dimensional queens problem.
